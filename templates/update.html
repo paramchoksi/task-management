@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Update {% endblock title %}
+
+{% block body %}
+
+  <div class="container my-4">
+    <h3> Update ToDo</h3>
+    <form action="/index/home/{{username}}/{{table_name}}/update/{{sno}}" method='POST'>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" id="title" value="{{todo[0]}}" aria-describedby="emailHelp"
+          placeholder="Update your <{{sno}}> todo title">
+      </div>
+      <div class="form-group">
+        <label for="desc">Description</label>
+        <input type="text" class="form-control" name="desc" id="desc" value="{{todo[1]}}" placeholder="Update your <{{sno}}> todo Description">
+      </div>
+      <button type="submit" class="btn btn-dark">Update</button>
+    </form>
+  </div>
+
+
+{% endblock body %}

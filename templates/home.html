@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+
+  <div class="container my-4">
+    <h3> Add New ToDo</h3>
+    <form action="/index/home/{{username}}/{{table_name}}" method='POST'>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp"
+          placeholder="Enter your todo title">
+      </div>
+      <div class="form-group">
+        <label for="desc">Description</label>
+        <input type="text" class="form-control" name="desc" id="desc" placeholder="Enter your todo Description">
+      </div>
+<!--      <a href="/index/home/{{username}}" type="submit" class="btn btn-dark">Submit</a>-->
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+  </div>
+
+  <div class="container my-4">
+    <h3> My ToDos</h3>
+
+
+    {% if allToDo|length == 0 %}
+      <div class="alert alert-dark" role="alert">
+        No Records Found. Enter you ToDo now!
+      </div>
+    {% else %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">SrNo</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Time</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in allToDo %}
+        <tr>
+          <th scope="col">{{loop.index}}</th>
+          <td>{{todo[1]}}</td>
+          <td>{{todo[2]}}</td>
+          <td>{{todo[3]}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <a href="/index/home/{{username}}/{{table_name}}/update/{{loop.index}}" type="button" class="btn btn-outline-dark btn-sm">Update</a>
+              <a href="/index/home/{{username}}/{{table_name}}/delete/{{loop.index}}" type="button" class="btn btn-outline-dark btn-sm">Delete</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>  
+    </table>
+    {% endif %}
+
+
+  </div>
+
+{% endblock body %}
